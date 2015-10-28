@@ -3,12 +3,15 @@
 This is a modified playbook of the Ansible example playbook modified to
 work on CentOS 7.1 on Digital Ocean.
 
+It also adds support for multi-site configuration so you can host multiple
+blogs on one server. See `group_vars/all` for an example.
+
 - Requires Ansible 1.2 or newer
 - Expects CentOS/RHEL 7.x host/s
 
 These playbooks deploy a simple all-in-one configuration of the popular
 WordPress blogging platform and CMS, frontend by the Nginx web server and the
-PHP-FPM process manager. To use, copy the `hosts.example` file to `hosts` and 
+PHP-FPM process manager. To use, copy the `hosts.example` file to `hosts` and
 edit the `hosts` inventory file to include the names or URLs of the servers
 you want to deploy.
 
@@ -29,7 +32,5 @@ the `group_vars/all` file.
 
 Here are some ideas for ways that these playbooks could be extended:
 
-- Parameterize the WordPress deployment to handle multi-site configurations.
-- Separate the components (PHP-FPM, MySQL, Nginx) onto separate hosts and 
-handle the configuration appropriately.
 - Handle WordPress upgrades automatically.
+- Randomly generated database passwords.

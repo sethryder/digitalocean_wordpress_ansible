@@ -1,33 +1,44 @@
 ---
+- name: Add Wordpress groups
+  group: name={{ item.key }}
+  with_dict: "{{blogs}}"
+
+- name: Add WordPress users
+  user: name={{ item.key }} group={{ item.key }} home=/srv/{{ item.key }}/
+  with_dict: "{{ blogs }}"
+
+- name: create wordpress directories
+  file: dest=/srv/{{ item.key }}/ state=directory owner={{ item.key }}
+  with_dict: "{{ blogs }}"
+
 - name: Download WordPress
   get_url: url=http://wordpress.org/wordpress-{{ wp_version }}.tar.gz dest=/srv/wordpress-{{ wp_version }}.tar.gz
            sha256sum="{{ wp_sha256sum }}"
 
 - name: Extract archive
-  command: chdir=/srv/ /bin/tar xvf wordpress-{{ wp_version }}.tar.gz creates=/srv/wordpress
-
-- name: Add group "wordpress"
-  group: name=wordpress
-
-- name: Add user "wordpress"
-  user: name=wordpress group=wordpress home=/srv/wordpress/
+  command: /bin/tar xvf /srv/wordpress-{{ wp_version }}.tar.gz -C /srv/{{ item.key }} --strip-components 1
+  with_dict: "{{ blogs }}"
 
 - name: Fetch random salts for WordPress config
   local_action: command curl https://api.wordpress.org/secret-key/1.1/salt/
   register: "wp_salt"
   sudo: no
 
-- name: Create WordPress database
-  mysql_db: name={{ wp_db_name }} state=present
+- name: Create WordPress databases
+  mysql_db: name={{ item.key }}_db state=present
+  with_dict: "{{ blogs }}"
 
-- name: Create WordPress database user
-  mysql_user: name={{ wp_db_user }} password={{ wp_db_password }} priv={{ wp_db_name }}.*:ALL host='localhost' state=present
+- name: Create WordPress database users
+  mysql_user: name={{ item.key }}_usr password={{ item.value.wp_db_password }} priv={{ item.key }}_db.*:ALL host='localhost' state=present
+  with_dict: "{{ blogs }}"
 
-- name: Copy WordPress config file
-  template: src=wp-config.php dest=/srv/wordpress/
+- name: Copy WordPress config files
+  template: src=wp-config.php dest=/srv/{{ item.key }}/
+  with_dict: "{{ blogs }}"
 
-- name: Change ownership of WordPress installation
-  file: path=/srv/wordpress/ owner=wordpress group=wordpress state=directory recurse=yes
+- name: Change ownership of WordPress installations
+  file: path=/srv/{{ item.key }}/ owner={{ item.key }} group={{ item.key }} state=directory recurse=yes
+  with_dict: "{{ blogs }}"
 
 - name: Start php-fpm Service
   service: name=php-fpm state=started enabled=yes
