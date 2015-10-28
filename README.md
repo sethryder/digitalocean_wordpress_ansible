@@ -1,6 +1,6 @@
-## WordPress+Nginx+PHP-FPM+MariaDB Deployment (for Digital Ocean CentOS 7.1)
+## WordPress Deployment (for Digital Ocean CentOS 7.1)
 
-This is a slightly modified playbook of the Ansible example playbook made to
+This is a modified playbook of the Ansible example playbook modified to
 work on CentOS 7.1 on Digital Ocean.
 
 - Requires Ansible 1.2 or newer
@@ -18,6 +18,12 @@ Then run the playbook, like this:
 
 The playbooks will configure MariaDB, WordPress, Nginx, and PHP-FPM. When the run
 is complete, you can hit access server to begin the WordPress configuration.
+
+### Recommended Changes
+
+If you plan on using this in a production enviorment, it is HIGHLY recommended
+that you change the default wordpress database name, username, and password in
+the `group_vars/all` file.
 
 ### Ideas for Improvement
 
