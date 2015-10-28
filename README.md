@@ -1,10 +1,14 @@
 ## WordPress Deployment (for Digital Ocean CentOS 7.1)
 
-This is a modified playbook of the Ansible example playbook modified to
-work on CentOS 7.1 on Digital Ocean.
+This is a playbook built to get WordPress up and running on CentOS 7.1 on
+Digital Ocean. It has only been tested with the default droplet setup from
+Digital Ocean but may work other places as well.
 
-It also adds support for multi-site configuration so you can host multiple
-blogs on one server. See `group_vars/all` for an example.
+Some of roles were pulled and modified to work Digital Ocean from the Ansible
+example playbooks.
+
+Also support for multi-site configuration has been added. This allows you to run
+multiple WordPress blogs on one server. See `group_vars/all` for an example.
 
 - Requires Ansible 1.2 or newer
 - Expects CentOS/RHEL 7.x host/s
