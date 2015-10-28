@@ -1,16 +1,17 @@
 ---
-# Default system settings
-ssh_port: 22
 
 # System level settings
 wp_version: 4.3.1
 wp_sha256sum: df5a5bfa28c916e11e8a636297c8eeb68816fff1d1bc2564c1d73c0063f0027c
 
+# SSH port
+ssh_port: 22
+
 # MySQL settings
 mysqlservice: mysqld
 mysql_port: 3306
 
-# This is used for the nginx server configuration, but access to the
+# Nginx server port
 nginx_port: 80
 
 # Blog configurations
