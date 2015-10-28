@@ -19,6 +19,8 @@ PHP-FPM process manager. To use, copy the `hosts.example` file to `hosts` and
 edit the `hosts` inventory file to include the names or URLs of the servers
 you want to deploy.
 
+You will need to update the `group_vars/all` file with your blog configurations.
+
 Then run the playbook, like this:
 
 	ansible-playbook -i hosts site.yml
@@ -28,7 +30,7 @@ is complete, you can hit access server to begin the WordPress configuration.
 
 ### Recommended Changes
 
-If you plan on using this in a production enviorment, it is HIGHLY recommended
+If you plan on using this in a production environment, it is HIGHLY recommended
 that you change the default wordpress database name, username, and password in
 the `group_vars/all` file.
 
