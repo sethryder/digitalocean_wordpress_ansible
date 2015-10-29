@@ -8,7 +8,7 @@
   with_dict: "{{ blogs }}"
 
 - name: create wordpress directories
-  file: dest=/srv/{{ item.key }}/ state=directory owner={{ item.key }}
+  file: dest=/srv/{{ item.key }}/ state=directory owner={{ item.key }} mode=0755
   with_dict: "{{ blogs }}"
 
 - name: Download WordPress

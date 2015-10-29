@@ -75,10 +75,10 @@ define('WPLANG', '');
 define('WP_DEBUG', false);
 
 /** Disable Automatic Updates Completely */
-define( 'AUTOMATIC_UPDATER_DISABLED', {{auto_up_disable}} );
+define( 'AUTOMATIC_UPDATER_DISABLED', {{ item.value.auto_up_disable }} );
 
 /** Define AUTOMATIC Updates for Components. */
-define( 'WP_AUTO_UPDATE_CORE', {{core_update_level}} );
+define( 'WP_AUTO_UPDATE_CORE', {{ item.value.core_update_level }} );
 
 /* That's all, stop editing! Happy blogging. */
 
